@@ -1,25 +1,34 @@
--- Задания выполнял в локальной базе данных, скачанной отсюда: https://postgrespro.ru/docs/postgrespro/10/demodb-bookings-installation
+-- Задания выполнял в локальной базе данных, скачанной отсюда:
+-- https://postgrespro.ru/docs/postgrespro/10/demodb-bookings-installation
 
-select city as qty
+-- Задание 4.1
+-- База данных содержит список аэропортов практически всех крупных городов России. В большинстве городов есть только
+-- один аэропорт. Исключение составляет:
+select city
 from airports
 group by city
 having count(*) > 1;
 
+-- Задание 4.2
+
+-- Вопрос 1. Таблица рейсов содержит всю информацию о прошлых, текущих и запланированных рейсах. Сколько всего статусов
+-- для рейсов определено в таблице?
 select count(distinct status)
 from flights;
 
-select distinct status
-from flights;
-
+-- Вопрос 2. Какое количество самолетов находятся в воздухе на момент среза в базе (статус рейса «самолёт уже вылетел и
+-- находится в воздухе»).
 select count(*)
 from flights
 where status = 'Departed';
 
+-- Вопрос 3. Места определяют схему салона каждой модели. Сколько мест имеет самолет модели  (Boeing 777-300)?
 select count(*)
 from seats
 left join aircrafts a on seats.aircraft_code = a.aircraft_code
 where model = 'Боинг 777-300';
 
+-- Вопрос 4. Сколько состоявшихся (фактических) рейсов было совершено между 1 апреля 2017 года и 1 сентября 2017 года?
 select count(*)
 from flights
 where 1=1
