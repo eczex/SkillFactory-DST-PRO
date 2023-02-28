@@ -12,7 +12,7 @@ def game_core_v3(number):
         elif number < predict: 
             predict -= half
         half = half // 2 or 1
-    return(count) # выход из цикла, если угадали
+    return(count)
         
         
 def score_game(game_core):
